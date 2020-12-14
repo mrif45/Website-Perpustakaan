@@ -141,7 +141,7 @@ include('includes/config.php'); ?>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $sql = "SELECT siswa.nama_siswa, buku.nama_buku, buku.ISBN, peminjaman.tgl_pinjam, peminjaman.tgl_kembali, peminjaman.id as rid from peminjaman join siswa on siswa.id_siswa = peminjaman.id_siswa join buku on buku.id_buku=peminjaman.id_buku order by peminjaman.id desc";
+                                        <?php $sql = "SELECT siswa.nama_siswa, buku.nama_buku, buku.ISBN, peminjaman.tgl_pinjam, peminjaman.tgl_kembali, peminjaman.id_pinjam as rid from peminjaman join siswa on siswa.id_siswa = peminjaman.id_siswa join buku on buku.id_buku=peminjaman.id_buku order by peminjaman.id_pinjam desc";
                                         $query = $dbh->prepare($sql);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);

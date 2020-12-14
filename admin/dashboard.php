@@ -126,7 +126,7 @@ include('includes/config.php'); ?>
                         <i class='bx bx-recycle nav__icon'></i>
                         <?php
                         $status = 1;
-                        $sql2 = "SELECT id_peminjaman from peminjaman where status=:status";
+                        $sql2 = "SELECT id_pinjam from peminjaman where status=:status";
                         $query2 = $dbh->prepare($sql2);
                         $query2->bindParam(':status', $status, PDO::PARAM_STR);
                         $query2->execute();

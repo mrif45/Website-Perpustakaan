@@ -98,7 +98,7 @@ include('includes/config.php');
                                     <tbody>
                                         <?php
                                         // $sid = $_SESSION['stdid'];
-                                        $sql = "SELECT buku.nama_buku, buku.ISBN, peminjaman.tgl_pinjam ,peminjaman.tgl_kembali, peminjaman.id as rid, peminjaman.denda from peminjaman join siswa on siswa.id_siswa=peminjaman.id_siswa join buku on buku.id_buku=peminjaman.id_buku  order by peminjaman.id desc";
+                                        $sql = "SELECT buku.nama_buku, buku.ISBN, peminjaman.tgl_pinjam ,peminjaman.tgl_kembali, peminjaman.id_pinjam as rid, peminjaman.denda from peminjaman join siswa on siswa.id_siswa=peminjaman.id_siswa join buku on buku.id_buku=peminjaman.id_buku  order by peminjaman.id_pinjam desc";
                                         $query = $dbh->prepare($sql);
                                         // $query->bindParam(':sid', $sid, PDO::PARAM_STR);
                                         $query->execute();

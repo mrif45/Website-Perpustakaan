@@ -1,7 +1,4 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php'); ?>
+<?php include('includes/config.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +29,6 @@ include('includes/config.php'); ?>
             <img src="assets/Img/profile.png" alt="">
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>
@@ -80,69 +76,78 @@ include('includes/config.php'); ?>
             </a>
         </nav>
     </div>
+
     <div class="content-wrapper">
         <div class="container">
             <div class="row pad-botm">
                 <div class="col-md-12">
                     <h4 class="header-line">Edit Kategori</h4>
-
                 </div>
-
             </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"">
-<div class=" panel panel-info">
+            
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <div class=" panel panel-info">
                     <div class="panel-heading">
                         Info Kategori
                     </div>
+                </div>
 
-                    <div class="panel-body">
-                        <form role="form" method="post">
-                            <?php
-                            $idKat = intval($_GET['idKat']);
-                            $sql = "SELECT * from kategori where id_kategori=:idKat"; //idKat apeni
-                            $query = $dbh->prepare($sql);
-                            $query->bindParam(':idKat', $idKat, PDO::PARAM_STR); //idKat apeni
-                            $query->execute();
-                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                            if ($query->rowCount() > 0) {
-                                foreach ($results as $result) {
-                            ?>
-                                    <div class="form-group">
-                                        <label>Nama Kategori </label>
-                                        <input class="form-control" type="text" name="kategori" value="<?php echo htmlentities($result->kategoriName); ?>" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Status</label>
-                                        <?php if ($result->Status == 1) { ?>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="1" checked="checked">Active
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="0">Tidak Aktif
-                                                </label>
-                                            </div>
-                                        <?php } else { ?>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="0" checked="checked">Inactive
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="1">Aktif
-                                                </label>
-                                            </div>
-                                    </div <?php } ?>> <?php }
-                                                } ?>
-                            <button type="submit" name="update" class="btn btn-info">Update</button>
-                        </form>
-                    </div>
+                <div class="panel-body">
+                    <form role="form" method="post">
+                        <?php
+                        $idKat = intval($_GET['idKat']);
+                        $sql = "SELECT * from kategori where id_kategori=:idKat"; //idKat apeni
+                        $query = $dbh->prepare($sql);
+                        $query->bindParam(':idKat', $idKat, PDO::PARAM_STR); //idKat apeni
+                        $query->execute();
+                        $results = $query->fetchAll(PDO::FETCH_OBJ);
+                        if ($query->rowCount() > 0) {
+                            foreach ($results as $result) {
+                        ?>
+                        
+                        <!-- Nama Kategori -->
+                        <div class="form-group">
+                            <label>Nama Kategori </label>
+                            <input class="form-control" type="text" name="kategori" value="<?php echo htmlentities($result->kategoriName); ?>" required />
+                        </div>
+
+                        <!-- Status -->
+                        <div class="form-group">
+                            <label>Status</label>
+                            <?php if ($result->Status == 1) { ?>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="1" checked="checked">Active
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="0">Tidak Aktif
+                                    </label>
+                                </div>
+                            <?php } else { ?>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="0" checked="checked">Inactive
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="1">Aktif
+                                    </label>
+                                </div>
+                            </div> 
+                            <?php } ?>
+                        <?php }
+                        } ?>
+
+                        <!-- Update Button -->
+                        <button type="submit" name="update" class="btn btn-info">Update</button>
+                    </form>
                 </div>
             </div>
+        </div>
         </div>
     </div>
     </div>

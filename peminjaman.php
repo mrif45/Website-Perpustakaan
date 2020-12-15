@@ -1,7 +1,4 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+<?php include('includes/config.php');
 ?>
 
 <!DOCTYPE html>
@@ -97,12 +94,14 @@ include('includes/config.php');
                                     </thead>
                                     <tbody>
                                         <?php
-                                        // $sid = $_SESSION['stdid'];
-                                        $sql = "SELECT buku.nama_buku, buku.ISBN, peminjaman.tgl_pinjam ,peminjaman.tgl_kembali, peminjaman.id_pinjam as rid, peminjaman.denda from peminjaman join siswa on siswa.id_siswa=peminjaman.id_siswa join buku on buku.id_buku=peminjaman.id_buku  order by peminjaman.id_pinjam desc";
+                                        $sid = $_SESSION['stdid'];
+                                        $sql = "SELECT buku.nama_buku, buku.ISBN, peminjaman.tgl_pinjam ,peminjaman.tgl_kembali, peminjaman.id_pinjam as rid, peminjaman.denda from peminjaman join siswa on siswa.id_siswa=peminjaman.id_siswa join buku on buku.id_buku=peminjaman.id_buku  where siswa.id_siswa=:sid order by peminjaman.id_pinjam desc";
                                         $query = $dbh->prepare($sql);
-                                        // $query->bindParam(':sid', $sid, PDO::PARAM_STR);
+                                        $query->bindParam(':sid', $sid, PDO::PARAM_STR);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
+
+                                        //nomor
                                         $cnt = 1;
                                         if ($query->rowCount() > 0) {
                                             foreach ($results as $result) { ?>
@@ -130,7 +129,6 @@ include('includes/config.php');
                             </div>
                         </div>
                     </div>
-                    <!--End Advanced Tables -->
                 </div>
             </div>
         </div>

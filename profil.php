@@ -1,22 +1,19 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+<?php include('includes/config.php');
 // if (strlen($_SESSION['login']) == 0) {
 //     header('location:index.php');
 // } else {
-    if (isset($_POST['update'])) {
-        $name = $_POST['name'];
-        $notel = $_POST['notel'];
+if (isset($_POST['update'])) {
+    $name = $_POST['name'];
+    $notel = $_POST['notel'];
 
-        $sql = "UPDATE siswa set nama_siswa=:name,no_telp=:notel";
-        $query = $dbh->prepare($sql);
-        $query->bindParam(':name', $name, PDO::PARAM_STR);
-        $query->bindParam(':notel', $notel, PDO::PARAM_STR);
-        $query->execute();
+    $sql = "UPDATE siswa set nama_siswa=:name,no_telp=:notel";
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':name', $name, PDO::PARAM_STR);
+    $query->bindParam(':notel', $notel, PDO::PARAM_STR);
+    $query->execute();
 
-        echo '<script>alert("Profil anda sudah di update")</script>';
-    }
+    echo '<script>alert("Profil anda sudah di update")</script>';
+}
 // }
 ?>
 
@@ -104,24 +101,29 @@ include('includes/config.php');
                         <div class="panel-body">
                             <form name="signup" method="post">
                                 <?php
-                                // $sid = $_SESSION['stdid'];
+                                $sid = $_SESSION['stdid'];
                                 $sql = "SELECT id_siswa,nama_siswa,email_siswa,no_telp,tgl_reg,tgl_update,status from  siswa";
                                 $query = $dbh->prepare($sql);
-                                // $query->bindParam(':sid', $sid, PDO::PARAM_STR);
+                                $query->bindParam(':sid', $sid, PDO::PARAM_STR);
                                 $query->execute();
                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
+
                                 $cnt = 1;
                                 if ($query->rowCount() > 0) {
-                                    foreach ($results as $result) {               ?>
+                                    foreach ($results as $result) { ?>
+                                        <!-- id_siswa -->
                                         <div class="form-group">
                                             <label>ID Siswa: </label>
                                             <?php echo htmlentities($result->id_siswa); ?>
                                         </div>
 
+                                        <!-- tgl_reg -->
                                         <div class="form-group">
                                             <label>Tanggal Daftar : </label>
                                             <?php echo htmlentities($result->tgl_reg); ?>
                                         </div>
+
+                                        <!-- tgl_update -->
                                         <?php if ($result->tgl_update != "") { ?>
                                             <div class="form-group">
                                                 <label>Tanggal diubah : </label>
@@ -129,7 +131,7 @@ include('includes/config.php');
                                             </div>
                                         <?php } ?>
 
-
+                                        <!-- status -->
                                         <div class="form-group">
                                             <label>Status : </label>
                                             <?php if ($result->status == 1) { ?>
@@ -139,16 +141,20 @@ include('includes/config.php');
                                             <?php } ?>
                                         </div>
 
+                                        <!-- Edit section -->
+                                        <!-- nama -->
                                         <div class="form-group">
                                             <label>Masukan Nama</label>
                                             <input class="form-control" type="text" name="name" value="<?php echo htmlentities($result->nama_siswa); ?>" autocomplete="off" required />
                                         </div>
 
+                                        <!-- no_telp -->
                                         <div class="form-group">
                                             <label>Nomor Telepon</label>
-                                            <input class="form-control" type="text" name="notelp" maxlength="10" value="<?php echo htmlentities($result->no_telp); ?>" autocomplete="off" required />
+                                            <input class="form-control" type="text" name="notel" maxlength="10" value="<?php echo htmlentities($result->no_telp); ?>" autocomplete="off" required />
                                         </div>
 
+                                        <!-- email -->
                                         <div class="form-group">
                                             <label>Email</label>
                                             <input class="form-control" type="email" name="email" id="email_siswa" value="<?php echo htmlentities($result->email_siswa); ?>" autocomplete="off" required readonly />
@@ -156,8 +162,8 @@ include('includes/config.php');
                                 <?php }
                                 } ?>
 
+                                <!-- update button -->
                                 <button type="submit" name="update" class="btn btn-primary" id="submit">Pebarui</button>
-
                             </form>
                         </div>
                     </div>

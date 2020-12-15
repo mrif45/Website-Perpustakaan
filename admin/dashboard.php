@@ -1,7 +1,4 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php'); ?>
+<?php include('includes/config.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,6 +85,7 @@ include('includes/config.php'); ?>
                 </div>
             </div>
 
+            <!-- Jumlah Buku -->
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="alert alert-success back-widget-set text-center">
@@ -105,6 +103,7 @@ include('includes/config.php'); ?>
                     </div>
                 </div>
 
+                <!-- Jumlah Buku dipinjam -->
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="alert alert-info back-widget-set text-center">
                         <i class='bx bxs-cart-add nav__icon'></i>
@@ -121,6 +120,7 @@ include('includes/config.php'); ?>
                     </div>
                 </div>
 
+                <!-- Jumlah Buku dikembalikan-->
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="alert alert-warning back-widget-set text-center">
                         <i class='bx bx-recycle nav__icon'></i>
@@ -140,6 +140,7 @@ include('includes/config.php'); ?>
                 </div>
             </div>
 
+            <!-- Jumlah Anggota -->
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="alert alert-danger back-widget-set text-center">
@@ -156,6 +157,7 @@ include('includes/config.php'); ?>
                     </div>
                 </div>
 
+                <!-- Jumlah kategori -->
                 <div class="col-md-3 col-sm-3 rscol-xs-6">
                     <div class="alert alert-info back-widget-set text-center">
                         <i class='bx bxs-folder-open nav__icon'></i>

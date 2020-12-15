@@ -1,7 +1,4 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php'); ?>
+<?php include('includes/config.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +28,6 @@ include('includes/config.php'); ?>
             <img src="assets/Img/profile.png" alt="">
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>

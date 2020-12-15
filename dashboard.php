@@ -1,7 +1,8 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php'); ?>
+<?php include('includes/config.php');
+// if (strlen($_SESSION['login']) == 0) {
+//     header('location:index.php');
+// } else { 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,10 +30,9 @@ include('includes/config.php'); ?>
         </div>
 
         <div class="header__img">
-            <img href="profil.php" src="assets/Img/profile.png" alt="">
+            <img src="assets/Img/profile.png" alt="">
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>
@@ -78,8 +78,9 @@ include('includes/config.php'); ?>
                     <h4 class="header-line">DASHBOARD</h4>
                 </div>
             </div>
-            
+
             <div class="row">
+                <!-- buku yang dipinjam -->
                 <div class="col-md-5 col-sm-3 col-xs-6">
                     <div class="alert alert-info back-widget-set text-center">
                         <i class='bx bxs-book nav__icon'></i>
@@ -98,11 +99,12 @@ include('includes/config.php'); ?>
                     </div>
                 </div>
 
+                <!-- buku yang belum dikembalikan -->
                 <div class="col-md-5 col-sm-3 col-xs-6">
                     <div class="alert alert-warning back-widget-set text-center">
                         <i class='bx bx-recycle nav__icon'></i>
                         <?php
-                        // $rsts = 0;
+                        $rsts = 0;
                         $sql2 = "SELECT id_pinjam from peminjaman and status=:rsts";
                         $query2 = $dbh->prepare($sql2);
                         // $query2->bindParam(':sid', $sid, PDO::PARAM_STR);

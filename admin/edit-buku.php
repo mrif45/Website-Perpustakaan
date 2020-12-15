@@ -1,7 +1,4 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php'); ?>
+<?php include('includes/config.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +28,6 @@ include('includes/config.php'); ?>
             <img src="assets/Img/profile.png" alt="">
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>
@@ -85,81 +81,82 @@ include('includes/config.php'); ?>
             <div class="row pad-botm">
                 <div class="col-md-12">
                     <h4 class="header-line">Edit Buku</h4>
-
                 </div>
-
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <div class=" panel panel-info">
-                    <div class="panel-heading">
-                        Info Buku
-                    </div>
-                    <div class="panel-body">
-                        <form role="form" method="post">
-                            <?php
-                            $idbuku = intval($_GET['idbuku']);
-                            $sql = "SELECT buku.nama_buku,kategori.nama_kategori,kategori.id_buku as id_kat,buku.ISBN, buku.harga,buku.id_buku as idbuku from buku join kategori on kategori.id_kategori=buku.id_kategori"; 
-                            $query = $dbh->prepare($sql);
-                            $query->bindParam(':idbuku', $idbuku, PDO::PARAM_STR);
-                            $query->execute();
-                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                            $cnt = 1;
-                            if ($query->rowCount() > 0) {
-                                foreach ($results as $result) {               ?>
-                                    <div class="form-group">
-                                        <label>Nama Buku<span style="color:red;">*</span></label>
-                                        <input class="form-control" type="text" name="nama_buku" value="<?php echo htmlentities($result->nama_buku); ?>" required />
-                                    </div>
+                    <div class=" panel panel-info">
+                        <div class="panel-heading">
+                            Info Buku
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" method="post">
+                                <?php
+                                $idbuku = intval($_GET['idbuku']);
+                                $sql = "SELECT buku.nama_buku,kategori.nama_kategori,kategori.id_buku as id_kat,buku.ISBN, buku.harga,buku.id_buku as idbuku from buku join kategori on kategori.id_kategori=buku.id_kategori";
+                                $query = $dbh->prepare($sql);
+                                $query->bindParam(':idbuku', $idbuku, PDO::PARAM_STR);
+                                $query->execute();
+                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                $cnt = 1;
+                                if ($query->rowCount() > 0) {
+                                    foreach ($results as $result) {               ?>
+                                        <div class="form-group">
+                                            <label>Nama Buku<span style="color:red;">*</span></label>
+                                            <input class="form-control" type="text" name="nama_buku" value="<?php echo htmlentities($result->nama_buku); ?>" required />
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label> Kategori<span style="color:red;">*</span></label>
-                                        <select class="form-control" name="kategori" required="required">
-                                            <option value="<?php echo htmlentities($result->id_kat); ?>"> <?php echo htmlentities($catname = $result->kategoriName); ?></option>
-                                            <?php
-                                            $status = 1;
-                                            $sql1 = "SELECT * from  kategori where Status=:status"; //cek cek
-                                            $query1 = $dbh->prepare($sql1);
-                                            $query1->bindParam(':status', $status, PDO::PARAM_STR);
-                                            $query1->execute();
-                                            $resultss = $query1->fetchAll(PDO::FETCH_OBJ);
-                                            if ($query1->rowCount() > 0) {
-                                                foreach ($resultss as $row) {
-                                                    if ($catname == $row->kategoriName) {
-                                                        continue;
-                                                    } else {
-                                            ?>
-                                                        <option value="<?php echo htmlentities($row->id_kategori); ?>"><?php echo htmlentities($row->kategoriName); ?></option>
-                                            <?php }
-                                                }
-                                            } ?>
-                                        </select>
-                                    </div>
+                                        <div class="form-group">
+                                            <label> Kategori<span style="color:red;">*</span></label>
+                                            <select class="form-control" name="kategori" required="required">
+                                                <option value="<?php echo htmlentities($result->id_kat); ?>"> <?php echo htmlentities($catname = $result->kategoriName); ?></option>
+                                                <?php
+                                                $status = 1;
+                                                $sql1 = "SELECT * from  kategori where Status=:status"; //cek cek
+                                                $query1 = $dbh->prepare($sql1);
+                                                $query1->bindParam(':status', $status, PDO::PARAM_STR);
+                                                $query1->execute();
+                                                $resultss = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                if ($query1->rowCount() > 0) {
+                                                    foreach ($resultss as $row) {
+                                                        if ($catname == $row->kategoriName) {
+                                                            continue;
+                                                        } else {
+                                                ?>
+                                                            <option value="<?php echo htmlentities($row->id_kategori); ?>"><?php echo htmlentities($row->kategoriName); ?></option>
+                                                <?php }
+                                                    }
+                                                } ?>
+                                            </select>
+                                        </div>
 
+                                        <!-- ISBN -->
+                                        <div class="form-group">
+                                            <label>Nomor ISBN <span style="color:red;">*</span></label>
+                                            <input class="form-control" type="text" name="isbn" value="<?php echo htmlentities($result->ISBNNumber); ?>" required="required" />
+                                            <p class="help-block">Nomor ISBN Harus Unik</p>
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label>Nomor ISBN <span style="color:red;">*</span></label>
-                                        <input class="form-control" type="text" name="isbn" value="<?php echo htmlentities($result->ISBNNumber); ?>" required="required" />
-                                        <p class="help-block">Nomor ISBN Harus Unik</p>
-                                    </div>
+                                        <!-- Harga -->
+                                        <div class="form-group">
+                                            <label>Harga(Rp)</label><span style="color:red;">*</span></label>
+                                            <!---ganti rp--->
+                                            <input class="form-control" type="text" name="harga" value="<?php echo htmlentities($result->Bookharga); ?>" required="required" />
+                                        </div>
+                                <?php }
+                                } ?>
+                                
+                                <!-- Tombol Update -->
+                                <button type="submit" name="update" class="btn btn-info">Update </button>
 
-                                    <div class="form-group">
-                                        <label>Harga(Rp)</label><span style="color:red;">*</span></label>
-                                        <!---ganti rp--->
-                                        <input class="form-control" type="text" name="harga" value="<?php echo htmlentities($result->Bookharga); ?>" required="required" />
-                                    </div>
-                            <?php }
-                            } ?>
-                            <button type="submit" name="update" class="btn btn-info">Update </button>
-
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
-
-    </div>
     </div>
     <?php include('includes/script.php'); ?>
 </body>

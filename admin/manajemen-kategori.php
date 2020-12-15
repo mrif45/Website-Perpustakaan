@@ -1,7 +1,4 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php'); ?>
+<?php include('includes/config.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +29,6 @@ include('includes/config.php'); ?>
             <img src="assets/Img/profile.png" alt="">
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>
@@ -115,8 +111,6 @@ include('includes/config.php'); ?>
                             </div>
                         </div>
                     <?php } ?>
-
-
                     <?php if ($_SESSION['delmsg'] != "") { ?>
                         <div class="col-md-6">
                             <div class="alert alert-success">
@@ -128,6 +122,7 @@ include('includes/config.php'); ?>
                     <?php } ?>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -173,7 +168,7 @@ include('includes/config.php'); ?>
                                                         <a href="manage-categories.php?del=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Are you sure you want to delete?');" >  <button class=" btn btn-danger"><i class='bx bxs-trash-alt nav__icon__lite'></i> Hapus</button>
                                                     </td>
                                                 </tr>
-                                        <?php $cnt = $cnt + 1;
+                                            <?php $cnt = $cnt + 1;
                                             }
                                         } ?>
                                     </tbody>
@@ -185,9 +180,6 @@ include('includes/config.php'); ?>
                     <!--End Advanced Tables -->
                 </div>
             </div>
-
-
-
         </div>
     </div>
     <?php include('includes/script.php'); ?>

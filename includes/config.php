@@ -1,4 +1,7 @@
-<?php 
+<?php
+session_start();
+error_reporting(0);
+
 define('DB_HOST','localhost');
 define('DB_USER','root');
 define('DB_PASS','');
@@ -10,3 +13,5 @@ try{
 catch (PDOException $e){
     exit("Error: " . $e->getMessage());
 }
+
+

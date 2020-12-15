@@ -1,7 +1,4 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php'); ?>
+<?php include('includes/config.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +28,6 @@ include('includes/config.php'); ?>
             <img src="assets/Img/profile.png" alt="">
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>
@@ -114,11 +110,9 @@ include('includes/config.php'); ?>
                             </div>
                         </div>
                     <?php } ?>
-
                 </div>
-
-
             </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -161,11 +155,10 @@ include('includes/config.php'); ?>
                                                                         }
                                                                         ?></td>
                                                     <td class="center">
-
                                                         <a href="update-issue-bookdeails.php?rid=<?php echo htmlentities($result->rid); ?>"><button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i> Edit</button>
                                                     </td>
                                                 </tr>
-                                        <?php $cnt = $cnt + 1;
+                                            <?php $cnt = $cnt + 1;
                                             }
                                         } ?>
                                     </tbody>

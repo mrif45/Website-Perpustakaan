@@ -1,7 +1,4 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php'); ?>
+<?php include('includes/config.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +28,6 @@ include('includes/config.php'); ?>
             <img src="assets/Img/profile.png" alt="">
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>
@@ -114,8 +110,6 @@ include('includes/config.php'); ?>
                             </div>
                         </div>
                     <?php } ?>
-
-
                     <?php if ($_SESSION['delmsg'] != "") { ?>
                         <div class="col-md-6">
                             <div class="alert alert-success">
@@ -125,11 +119,9 @@ include('includes/config.php'); ?>
                             </div>
                         </div>
                     <?php } ?>
-
                 </div>
-
-
             </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -157,7 +149,7 @@ include('includes/config.php'); ?>
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
                                         $cnt = 1;
                                         if ($query->rowCount() > 0) {
-                                            foreach ($results as $result) {               ?>
+                                            foreach ($results as $result) { ?>
                                                 <tr class="odd gradeX">
                                                     <td class="center"><?php echo htmlentities($cnt); ?></td>
                                                     <td class="center"><?php echo htmlentities($result->nama_buku); ?></td>
@@ -171,7 +163,7 @@ include('includes/config.php'); ?>
                                                         <a href="manage-books.php?del=<?php echo htmlentities($result->bookid); ?>" onclick="return confirm('Are you sure you want to delete?');"> <button class=" btn btn-danger"><i class='bx bxs-trash-alt nav__icon__lite'></i> Hapus</button>
                                                     </td>
                                                 </tr>
-                                        <?php $cnt = $cnt + 1;
+                                            <?php $cnt = $cnt + 1;
                                             }
                                         } ?>
                                     </tbody>

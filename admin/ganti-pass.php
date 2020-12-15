@@ -1,8 +1,4 @@
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-?>
+<?php include('includes/config.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,26 +19,6 @@ include('includes/config.php');
     <title>Perpustakaan | Ganti Password</title>
 </head>
 
-<style>
-    .errorWrap {
-        padding: 10px;
-        margin: 0 0 20px 0;
-        background: #fff;
-        border-left: 4px solid #dd3d36;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-    }
-
-    .succWrap {
-        padding: 10px;
-        margin: 0 0 20px 0;
-        background: #fff;
-        border-left: 4px solid #5cb85c;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-    }
-</style>
-
 <body id="body-pd">
     <header class="header" id="header">
         <div class="header__toggle">
@@ -53,7 +29,6 @@ include('includes/config.php');
             <img href="profil.php" src="assets/Img/profile.png" alt="">
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>

@@ -271,6 +271,12 @@ a {
     padding: auto;
 }
 
+.nav__icon__add {
+    display: inline;
+    position: absolute;
+    right: 3rem;   
+}
+
 .nav__name {
     font-size: medium;
 }

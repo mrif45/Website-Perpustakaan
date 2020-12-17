@@ -1,4 +1,13 @@
-<?php include('includes/config.php'); ?>
+<?php include('includes/config.php');
+if (isset($_GET['del'])) {
+    $idbuku = $_GET['del'];
+    $sql = "DELETE from buku WHERE id_buku=:id_buku";
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':idbuku', $idbuku, PDO::PARAM_STR);
+    $query->execute();
+    $_SESSION['delmsg'] = "Kategori telah terhapus";
+    header('location:manajemen-buku.php');
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +24,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
 
-    <title>Perpustakaan</title>
+    <title>Perpustakaan | Manajemen Buku</title>
 </head>
 
 <body id="body-pd">
@@ -128,6 +137,11 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar Buku
+                            <div class="nav__icon__add">
+                                <a href="edit-buku.php?id_buku=<?php echo htmlentities($result->id_buku); ?>">
+                                    <button class="btn btn-success">
+                                        <i class='bx bxs-pencil'></i> Tambah</button>
+                            </div>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -159,11 +173,12 @@
                                                     <td class="center"><?php echo htmlentities($result->harga); ?></td>
                                                     <td class="center">
 
-                                                        <a href="edit-buku.php?bookid=<?php echo htmlentities($result->bookid); ?>"><button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i> Edit</button>
-                                                        <a href="manage-books.php?del=<?php echo htmlentities($result->bookid); ?>" onclick="return confirm('Are you sure you want to delete?');"> <button class=" btn btn-danger"><i class='bx bxs-trash-alt nav__icon__lite'></i> Hapus</button>
+                                                        <a href="edit-buku.php<?php echo htmlentities($result->id_buku); ?>"><button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i>Edit</button>
+
+                                                            <a href="manajemen-buku.php?del=<?php echo htmlentities($result->id_buku); ?>" onclick="return confirm('Anda yakin ingin menghapus buku ini?');"> <button class=" btn btn-danger"><i class='bx bxs-trash-alt nav__icon__lite'></i> Hapus</button>
                                                     </td>
                                                 </tr>
-                                            <?php $cnt = $cnt + 1;
+                                        <?php $cnt = $cnt + 1;
                                             }
                                         } ?>
                                     </tbody>

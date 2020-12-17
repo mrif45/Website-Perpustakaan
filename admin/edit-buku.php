@@ -1,4 +1,21 @@
-<?php include('includes/config.php'); ?>
+<?php include('includes/config.php');
+if (isset($_POST['update'])) {
+    $nama_buku = $_POST['nama_buku'];
+    $kategori = $_POST['kategori'];
+    $isbn = $_POST['ISBN'];
+    $harga = $_POST['harga'];
+    $idbuku = intval($_GET['id_buku']);
+    $sql = "UPDATE buku set nama_buku=:nama_buku,id_kategori=:kategori,ISBN=:isbn,harga=:harga where id_buku=:id_buku"; 
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':nama_buku', $nama_buku, PDO::PARAM_STR);
+    $query->bindParam(':kategori', $kategori, PDO::PARAM_STR);
+    $query->bindParam(':isbn', $isbn, PDO::PARAM_STR);
+    $query->bindParam(':harga', $harga, PDO::PARAM_STR);
+    $query->bindParam(':idbuku', $idbuku, PDO::PARAM_STR);
+    $query->execute();
+    $_SESSION['msg'] = "Informasi Buku berhasil diupdate";
+    header('location:manajemen-buku.php');
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,8 +109,8 @@
                         <div class="panel-body">
                             <form role="form" method="post">
                                 <?php
-                                $idbuku = intval($_GET['idbuku']);
-                                $sql = "SELECT buku.nama_buku,kategori.nama_kategori,kategori.id_buku as id_kat,buku.ISBN, buku.harga,buku.id_buku as idbuku from buku join kategori on kategori.id_kategori=buku.id_kategori";
+                                $idbuku = intval($_GET['id_buku']);
+                                $sql = "SELECT buku.nama_buku,kategori.nama_kategori,kategori.id_buku as id_kat,buku.ISBN, buku.harga, buku.id_buku as idbuku from buku join kategori on kategori.id_kategori=buku.id_kategori";
                                 $query = $dbh->prepare($sql);
                                 $query->bindParam(':idbuku', $idbuku, PDO::PARAM_STR);
                                 $query->execute();
@@ -119,11 +136,11 @@
                                                 $resultss = $query1->fetchAll(PDO::FETCH_OBJ);
                                                 if ($query1->rowCount() > 0) {
                                                     foreach ($resultss as $row) {
-                                                        if ($catname == $row->kategoriName) {
+                                                        if ($catname == $row->nama_kategori) {
                                                             continue;
                                                         } else {
                                                 ?>
-                                                            <option value="<?php echo htmlentities($row->id_kategori); ?>"><?php echo htmlentities($row->kategoriName); ?></option>
+                                                            <option value="<?php echo htmlentities($row->id_kategori); ?>"><?php echo htmlentities($row->nama_kategori); ?></option>
                                                 <?php }
                                                     }
                                                 } ?>
@@ -133,7 +150,7 @@
                                         <!-- ISBN -->
                                         <div class="form-group">
                                             <label>Nomor ISBN <span style="color:red;">*</span></label>
-                                            <input class="form-control" type="text" name="isbn" value="<?php echo htmlentities($result->ISBNNumber); ?>" required="required" />
+                                            <input class="form-control" type="text" name="isbn" value="<?php echo htmlentities($result->ISBN); ?>" required="required" />
                                             <p class="help-block">Nomor ISBN Harus Unik</p>
                                         </div>
 
@@ -141,7 +158,7 @@
                                         <div class="form-group">
                                             <label>Harga(Rp)</label><span style="color:red;">*</span></label>
                                             <!---ganti rp--->
-                                            <input class="form-control" type="text" name="harga" value="<?php echo htmlentities($result->Bookharga); ?>" required="required" />
+                                            <input class="form-control" type="text" name="harga" value="<?php echo htmlentities($result->harga); ?>" required="required" />
                                         </div>
                                 <?php }
                                 } ?>

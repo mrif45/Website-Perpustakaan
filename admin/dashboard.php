@@ -15,7 +15,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
 
-    <title>Perpustakaan</title>
+    <title>Perpustakaan | Admin Dashboard</title>
 </head>
 
 <body id="body-pd">

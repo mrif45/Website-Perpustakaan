@@ -160,12 +160,12 @@
                                                         <?php } else { ?>
                                                             <a href="#" class="btn btn-danger btn-xs">Non-Aktif</a>
                                                         <?php } ?></td>
-                                                    <td class="center"><?php echo htmlentities($result->tgl_update); ?></td>
+                                                    <td class="center"><?php echo htmlentities($result->tgl_reg); ?></td>
                                                     <td class="center">
 
-                                                        <a href="edit-kategori.php?id_kategori=<?php echo htmlentities($result->id); ?>"><button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i>Edit</button>
+                                                        <a href="edit-kategori.php<?php echo htmlentities($result->id); ?>"><button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i>Edit</button>
 
-                                                        <a href="manage-categories.php?del=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Are you sure you want to delete?');" >  <button class=" btn btn-danger"><i class='bx bxs-trash-alt nav__icon__lite'></i> Hapus</button>
+                                                        <a href="manajemen-kategori.php?del=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Anda yakin ingin menghapus kategori ini?');" >  <button class=" btn btn-danger"><i class='bx bxs-trash-alt nav__icon__lite'></i> Hapus</button>
                                                     </td>
                                                 </tr>
                                             <?php $cnt = $cnt + 1;

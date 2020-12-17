@@ -89,15 +89,15 @@
                                             <th>ISBN </th>
                                             <th>Tanggal Pinjam</th>
                                             <th>Tanggal Kembali</th>
-                                            <th>Denda</th>
+                                            <th>Denda (Rp)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sid = $_SESSION['stdid'];
-                                        $sql = "SELECT buku.nama_buku, buku.ISBN, peminjaman.tgl_pinjam ,peminjaman.tgl_kembali, peminjaman.id_pinjam as rid, peminjaman.denda from peminjaman join siswa on siswa.id_siswa=peminjaman.id_siswa join buku on buku.id_buku=peminjaman.id_buku  where siswa.id_siswa=:sid order by peminjaman.id_pinjam desc";
+                                        // $sid = $_SESSION['stdid'];
+                                        $sql = "SELECT buku.nama_buku, buku.ISBN, peminjaman.tgl_pinjam ,peminjaman.tgl_kembali, peminjaman.denda from peminjaman join siswa on siswa.id_siswa=peminjaman.id_siswa join buku on buku.id_buku=peminjaman.id_buku  order by peminjaman.id_pinjam desc";
                                         $query = $dbh->prepare($sql);
-                                        $query->bindParam(':sid', $sid, PDO::PARAM_STR);
+                                        // $query->bindParam(':sid', $sid, PDO::PARAM_STR);
                                         $query->execute();
                                         $results = $query->fetchAll(PDO::FETCH_OBJ);
 

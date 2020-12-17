@@ -1,4 +1,22 @@
-<?php include('includes/config.php'); ?>
+<?php include('includes/config.php');
+if (isset($_POST['change'])) {
+    $password = md5($_POST['password']);
+    $newpassword = md5($_POST['newpassword']);
+    $sql = "SELECT password FROM siswa and password=:password";
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':password', $password, PDO::PARAM_STR);
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
+    if ($query->rowCount() > 0) {
+        $con = "UPDATE siswa set password=:newpassword";
+        $chngpwd1 = $dbh->prepare($con);
+        $chngpwd1->bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
+        $chngpwd1->execute();
+        $msg = "Password berhasil diperbarui";
+    } else {
+        $error = "Password Salah";
+    }
+}?>
 
 <!DOCTYPE html>
 <html lang="en">

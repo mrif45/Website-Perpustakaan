@@ -15,7 +15,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
 
-    <title>Perpustakaan</title>
+    <title>Perpustakaan | Manajemen Peminjaman</title>
 </head>
 
 <body id="body-pd">
@@ -155,7 +155,10 @@
                                                                         }
                                                                         ?></td>
                                                     <td class="center">
-                                                        <a href="update-issue-bookdeails.php?rid=<?php echo htmlentities($result->rid); ?>"><button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i> Edit</button>
+                                                        <a href="edit-peminjaman.php
+                                                        <?php //echo htmlentities($result->rid); ?>
+                                                        ">
+                                                        <button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i> Edit</button>
                                                     </td>
                                                 </tr>
                                             <?php $cnt = $cnt + 1;

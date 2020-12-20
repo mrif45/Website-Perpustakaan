@@ -5,10 +5,10 @@ SET time_zone = "+07:00";
 
 CREATE TABLE `admin` (
   `id_admin` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `nama_admin` varchar(100) DEFAULT NULL,
+  `nama_admin` varchar(120) DEFAULT NULL,
   `email_admin` varchar(120) DEFAULT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
+  `username` varchar(120) NOT NULL,
+  `password` varchar(120) NOT NULL,
   `tgl_reg` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -17,7 +17,7 @@ INSERT INTO `admin`(`id_admin`, `nama_admin`, `email_admin`, `username`, `passwo
 
 CREATE TABLE `kategori` (
   `id_kategori` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `nama_kategori`varchar(150) DEFAULT NULL,
+  `nama_kategori`varchar(120) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   `tgl_reg` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `tgl_update` DATETIME NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
@@ -66,11 +66,5 @@ CREATE TABLE `siswa` (
 
 INSERT INTO `siswa`(`no`, `id_siswa`, `nama_siswa`, `email_siswa`, `no_telp`, `password`, `status`, `tgl_reg`, `tgl_update`) VALUES
 (1, 'ID001', 'dafa', 'dafa@gmail.com', '08572635352', '202cb962ac59075b964b07152d234b70', 1, '2020-12-12 12:12:12', 'CURRENT_DATE()');
-
-ALTER TABLE `buku`
-  ADD UNIQUE KEY(id_kategori);
-
-ALTER TABLE `peminjaman`
-  ADD UNIQUE KEY(id_buku);
 
 COMMIT;

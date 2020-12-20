@@ -161,7 +161,7 @@ if (isset($_POST['adminlogin'])) {
                     <!-- sign up option -->
                     <div>
                         <span class="login__account">Belum punya akun?</span>
-                        <span class="login__signup" id="sign-up">Sign Up</span>
+                        <span class="login__signup" id="sign-up">Daftar</span>
                     </div>
 
                     <!-- admin login option -->
@@ -212,7 +212,7 @@ if (isset($_POST['adminlogin'])) {
                     <!-- sign in option -->
                     <div>
                         <span class="login__account">Sudah punya akun ?</span>
-                        <span class="login__signin" id="sign-in">Sign In</span>
+                        <span class="login__signin" id="sign-in">Masuk</span>
                     </div>
                 </form>
 

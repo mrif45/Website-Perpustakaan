@@ -1,4 +1,18 @@
-<?php include('includes/config.php'); ?>
+<?php include('includes/config.php');
+if (isset($_POST['return'])) {
+    $rid = intval($_GET['rid']);
+    $fine = $_POST['fine'];
+    $rstatus = 1;
+    $sql = "UPDATE peminjaman set denda=:fine, status=:rstatus where id_peminjaman=:rid";
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':rid', $rid, PDO::PARAM_STR);
+    $query->bindParam(':fine', $fine, PDO::PARAM_STR);
+    $query->bindParam(':rstatus', $rstatus, PDO::PARAM_STR);
+    $query->execute();
+
+    $_SESSION['msg'] = "Buku telah dikembalikan";
+    header('location:manajemen-peminjaman.php');
+}?>
 <!DOCTYPE html>
 <html lang="en">
 

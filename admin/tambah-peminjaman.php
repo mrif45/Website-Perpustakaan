@@ -1,4 +1,23 @@
-<?php include('includes/config.php'); ?>
+<?php include('includes/config.php');
+if (isset($_POST['add'])) {
+    $idsiswa = strtoupper($_POST['idsiswa']);
+    $id_buku = $_POST['detailBuku'];
+    $sql = "INSERT INTO peminjaman(id_siswa, id_buku) VALUES(:idsiswa,:id_buku)";
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':idsiswa', $idsiswa, PDO::PARAM_STR);
+    $query->bindParam(':id_buku', $id_buku, PDO::PARAM_STR);
+    $query->execute();
+    $lastInsertId = $dbh->lastInsertId();
+    if ($lastInsertId) {
+        $_SESSION['msg'] = "Buku Dipinjamkan";
+        header('location:manajemen-peminjaman.php');
+    } else {
+        $_SESSION['error'] = "Ada yang salah, Silahkan Coba Lagi";
+        header('location:manajemen-peminjaman.php');
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +35,37 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 
     <title>Perpustakaan | Manajemen Peminjaman</title>
+    <script>
+        // function for get student name
+        function getSiswa() {
+            $("#loaderIcon").show();
+            jQuery.ajax({
+                url: "get-siswa.php",
+                data: 'idsiswa=' + $("#idsiswa").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#get_student_name").html(data);
+                    $("#loaderIcon").hide();
+                },
+                error: function() {}
+            });
+        }
+
+        //function for book details
+        function getBuku() {
+            $("#loaderIcon").show();
+            jQuery.ajax({
+                url: "get-buku.php",
+                data: 'id_buku=' + $("#id_buku").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#get_book_name").html(data);
+                    $("#loaderIcon").hide();
+                },
+                error: function() {}
+            });
+        }
+    </script>
 </head>
 
 <body id="body-pd">
@@ -80,82 +130,43 @@
         <div class="container">
             <div class="row pad-botm">
                 <div class="col-md-12">
-                    <h4 class="header-line">Detail Peminjaman Buku</h4>
+                    <h4 class="header-line">Peminjaman Buku Baru</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
-<div class=" panel panel-info">
-                    <div class="panel-heading">
-                        Detail Peminjaman Buku
-                    </div>
-                    <div class="panel-body">
-                        <form role="form" method="post">
-                            <?php
-                            $rid = intval($_GET['rid']);
-                            $sql = "SELECT siswa.nama_siswa, buku.nama_buku, buku.ISBN, peminjaman.tgl_pinjam, peminjaman.tgl_kembali, peminjaman.id_peminjaman as rid, peminjaman.denda, peminjaman.status from  peminjaman join siswa on siswa.id_siswa=peminjaman.id_siswa join buku on buku.id_buku=peminjaman.id_buku where peminjaman.id_peminjaman=:rid";
-                            $query = $dbh->prepare($sql);
-                            $query->bindParam(':rid', $rid, PDO::PARAM_STR);
-                            $query->execute();
-                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                            $cnt = 1;
-                            if ($query->rowCount() > 0) {
-                                foreach ($results as $result) {?>
-                                    <div class="form-group">
-                                        <label>Nama Siswa :</label>
-                                        <?php echo htmlentities($result->FullName); ?>
-                                    </div>
+                    <div class=" panel panel-info">
+                        <div class="panel-heading">
+                            Peminjaman Buku Baru
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" method="post">
 
-                                    <div class="form-group">
-                                        <label>Nama Buku :</label>
-                                        <?php echo htmlentities($result->BookName); ?>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Student id<span style="color:red;">*</span></label>
+                                    <input class="form-control" type="text" name="idsiswa" id="idsiswa" onBlur="getSiswa()" autocomplete="off" required />
+                                </div>
 
+                                <div class="form-group">
+                                    <span id="get_student_name" style="font-size:16px;"></span>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label>ISBN :</label>
-                                        <?php echo htmlentities($result->ISBNNumber); ?>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Nomor ISBN/Judul Buku<span style="color:red;">*</span></label>
+                                    <input class="form-control" type="text" name="id_buku" id="id_buku" onBlur="getBuku()" required="required" />
+                                </div>
 
-                                    <div class="form-group">
-                                        <label>Tanggal Peminjaman :</label>
-                                        <?php echo htmlentities($result->IssuesDate); ?>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Tanggal Kembali :</label>
-                                        <?php if ($result->ReturnDate == "") {
-                                            echo htmlentities("Not Return Yet");
-                                        } else {
-                                            echo htmlentities($result->ReturnDate);
-                                        }
-                                        ?>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label> Denda :</label>
-                                        <?php
-                                        if ($result->fine == "") { ?>
-                                            <input class="form-control" type="text" name="fine" id="fine" required />
-                                        <?php } else {
-                                            echo htmlentities($result->fine);
-                                        }
-                                        ?>
-                                    </div>
-                                    <?php if ($result->RetrunStatus == 0) { ?>
-
-                                        <button type="submit" name="return" id="submit" class="btn btn-info">Pengembalian Buku </button>
-                                    </div>
-                                <?php }
-                                }
-                            } ?>
-                        </form>
+                                <div class="form-group">
+                                    <select class="form-control" name="detailBuku" id="get_book_name" readonly></select>
+                                </div>
+                                <button type="submit" name="add" id="submit" class="btn btn-info">Tambah </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <?php include('includes/script.php'); ?>
 </body>
 

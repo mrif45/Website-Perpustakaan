@@ -119,6 +119,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Peminjaman
+                            <a href="tambah-peminjaman.php"><button class="btn btn-success nav__icon__add"><i class='bx bxs-message-alt-add '></i>Tambah Peminjaman</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -156,12 +157,13 @@
                                                                         ?></td>
                                                     <td class="center">
                                                         <a href="edit-peminjaman.php
-                                                        <?php //echo htmlentities($result->rid); ?>
+                                                        <?php //echo htmlentities($result->rid); 
+                                                        ?>
                                                         ">
-                                                        <button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i> Edit</button>
+                                                            <button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i> Edit</button>
                                                     </td>
                                                 </tr>
-                                            <?php $cnt = $cnt + 1;
+                                        <?php $cnt = $cnt + 1;
                                             }
                                         } ?>
                                     </tbody>

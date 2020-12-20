@@ -89,6 +89,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Anggota Perpustakaan
+                            <a href="../index.php"><button class="btn btn-success nav__icon__add"><i class='bx bxs-message-alt-add '></i>Tambah Anggota</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -131,8 +132,8 @@
                                                             <a href="reg-students.php?inid=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Apakah anda yakin akan memblokir siswa ini?');"> <button class=" btn btn-danger"> Non-aktifkan</button>
                                                             <?php } else { ?>
 
-                                                            <a href="reg-students.php?id=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Apakah anda yakin akan mengaktifkan status siswa ini?');"><button class=" btn btn-primary">Aktifkan</button>
-                                                            <?php } ?>
+                                                                <a href="reg-students.php?id=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Apakah anda yakin akan mengaktifkan status siswa ini?');"><button class=" btn btn-primary">Aktifkan</button>
+                                                                <?php } ?>
                                                     </td>
                                                 </tr>
                                         <?php $cnt = $cnt + 1;

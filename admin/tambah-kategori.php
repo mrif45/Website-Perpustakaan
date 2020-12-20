@@ -1,4 +1,21 @@
-<?php include('includes/config.php'); ?>
+<?php include('includes/config.php');
+    if (isset($_POST['add'])) {
+        $kategori = $_POST['kategori'];
+        $status = $_POST['status'];
+        $sql = "INSERT INTO kategori(nama_kategori,status) VALUES(:kategori,:status)";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':kategori', $kategori, PDO::PARAM_STR);
+        $query->bindParam(':status', $status, PDO::PARAM_STR);
+        $query->execute();
+        $lastInsertId = $dbh->lastInsertId();
+        if ($lastInsertId) {
+            $_SESSION['msg'] = "Kategori Berhasil Diinputkan";
+            header('location:manajemen-kategori.php');
+        } else {
+            $_SESSION['error'] = "Ada kesalahan. Coba ulangi lagi !";
+            header('location:manajemen-kategori.php');
+        }
+    } ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +126,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <button type="submit" name="create" class="btn btn-info">Tambah</button>
+                            <button type="submit" name="add" class="btn btn-info">Tambah</button>
                         </form>
                     </div>
                 </div>

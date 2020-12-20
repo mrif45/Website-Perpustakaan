@@ -131,7 +131,7 @@ if (isset($_POST['add'])) {
                                     $cnt = 1;
                                     if ($query->rowCount() > 0) {
                                         foreach ($results as $result) {?>
-                                            <option value="<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->nama_kategori); ?></option>
+                                            <option value="<?php echo htmlentities($result->id_kategori); ?>"><?php echo htmlentities($result->nama_kategori); ?></option>
                                     <?php }
                                     } ?>
                                 </select>
@@ -140,7 +140,7 @@ if (isset($_POST['add'])) {
                             <div class="form-group">
                                 <label>Nomor ISBN<span style="color:red;">*</span></label>
                                 <input class="form-control" type="text" name="isbn" required="required" autocomplete="off" />
-                                <p class="help-block"></p>Nomor ISBN Harus Unik</p>
+                                <p class="help-block"></p>*Nomor ISBN Harus Unik</p>
                             </div>
 
                             <div class="form-group">

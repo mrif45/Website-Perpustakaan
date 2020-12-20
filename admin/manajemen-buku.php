@@ -7,7 +7,7 @@ if (isset($_GET['del'])) {
     $query->execute();
     $_SESSION['delmsg'] = "Kategori telah terhapus";
     header('location:manajemen-buku.php');
-}?>
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -137,11 +137,7 @@ if (isset($_GET['del'])) {
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar Buku
-                            <div class="nav__icon__add">
-                                <a href="edit-buku.php?id_buku=<?php echo htmlentities($result->id_buku); ?>">
-                                    <button class="btn btn-success">
-                                        <i class='bx bxs-pencil'></i> Tambah</button>
-                            </div>
+                            <a href="tambah-buku.php"><button class="btn btn-success nav__icon__add"><i class='bx bxs-message-alt-add '></i>Tambah Buku</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -172,6 +168,7 @@ if (isset($_GET['del'])) {
                                                     <td class="center"><?php echo htmlentities($result->ISBN); ?></td>
                                                     <td class="center"><?php echo htmlentities($result->harga); ?></td>
                                                     <td class="center">
+
 
                                                         <a href="edit-buku.php<?php echo htmlentities($result->id_buku); ?>"><button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i>Edit</button>
 

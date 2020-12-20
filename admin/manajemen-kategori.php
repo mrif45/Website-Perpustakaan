@@ -129,6 +129,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar Kategori
+                            <a href="tambah-kategori.php"><button class="btn btn-success nav__icon__add"><i class='bx bxs-message-alt-add '></i>Tambah Kategori</button></a>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -138,7 +139,7 @@
                                             <th>No.</th>
                                             <th>Kategori</th>
                                             <th>status</th>
-                                            
+
                                             <th>tanggal Update</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -165,10 +166,10 @@
 
                                                         <a href="edit-kategori.php<?php echo htmlentities($result->id); ?>"><button class="btn btn-primary"><i class='bx bxs-pencil nav__icon__lite'></i>Edit</button>
 
-                                                        <a href="manajemen-kategori.php?del=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Anda yakin ingin menghapus kategori ini?');" >  <button class=" btn btn-danger"><i class='bx bxs-trash-alt nav__icon__lite'></i> Hapus</button>
+                                                            <a href="manajemen-kategori.php?del=<?php echo htmlentities($result->id); ?>" onclick="return confirm('Anda yakin ingin menghapus kategori ini?');"> <button class=" btn btn-danger"><i class='bx bxs-trash-alt nav__icon__lite'></i> Hapus</button>
                                                     </td>
                                                 </tr>
-                                            <?php $cnt = $cnt + 1;
+                                        <?php $cnt = $cnt + 1;
                                             }
                                         } ?>
                                     </tbody>

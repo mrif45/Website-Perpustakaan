@@ -1,9 +1,10 @@
 <?php include('includes/config.php');
-// if (strlen($_SESSION['login']) == 0) {
-//     header('location:index.php');
-// } else {
+if (strlen($_SESSION['login']) == 0) {
+    header('location:index.php');
+} else {
 if (isset($_POST['update'])) {
-    $name = $_POST['name'];
+    $sid = $_SESSION['stdid'];
+    $name = $_POST['nama'];
     $notel = $_POST['notel'];
 
     $sql = "UPDATE siswa set nama_siswa=:name,no_telp=:notel";
@@ -13,8 +14,8 @@ if (isset($_POST['update'])) {
     $query->execute();
 
     echo '<script>alert("Profil anda sudah di update")</script>';
+    }
 }
-// }
 ?>
 
 <!DOCTYPE html>
@@ -145,7 +146,7 @@ if (isset($_POST['update'])) {
                                         <!-- nama -->
                                         <div class="form-group">
                                             <label>Masukan Nama</label>
-                                            <input class="form-control" type="text" name="name" value="<?php echo htmlentities($result->nama_siswa); ?>" autocomplete="off" required />
+                                            <input class="form-control" type="text" name="nama" value="<?php echo htmlentities($result->nama_siswa); ?>" autocomplete="off" required />
                                         </div>
 
                                         <!-- no_telp -->

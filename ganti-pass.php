@@ -2,19 +2,22 @@
 if (isset($_POST['change'])) {
     $password = md5($_POST['password']);
     $newpassword = md5($_POST['newpassword']);
-    $sql = "SELECT password FROM siswa and password=:password";
+    $email = $_SESSION['login'];
+    $sql = "SELECT password FROM siswa where email_siswa=:email and password=:password";
     $query = $dbh->prepare($sql);
+    $query->bindParam(':email', $email, PDO::PARAM_STR);
     $query->bindParam(':password', $password, PDO::PARAM_STR);
     $query->execute();
     $results = $query->fetchAll(PDO::FETCH_OBJ);
     if ($query->rowCount() > 0) {
-        $con = "UPDATE siswa set password=:newpassword";
+        $con = "update siswa set password=:newpassword where email_siswa=:email";
         $chngpwd1 = $dbh->prepare($con);
+        $chngpwd1->bindParam(':email', $email, PDO::PARAM_STR);
         $chngpwd1->bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
         $chngpwd1->execute();
-        $msg = "Password berhasil diperbarui";
+        $msg = "Password anda berhasil diperbarui";
     } else {
-        $error = "Password Salah";
+        $error = "Password Lama salah";
     }
 }?>
 
@@ -113,7 +116,7 @@ if (isset($_POST['change'])) {
 
                             <!-- password sekarang -->
                             <div class="form-group">
-                                <label>Password Sekarang</label>
+                                <label>Password Lama</label>
                                 <input class="form-control" type="password" name="password" autocomplete="off" required />
                             </div>
 

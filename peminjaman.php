@@ -1,4 +1,7 @@
 <?php include('includes/config.php');
+if (strlen($_SESSION['login']) == 0) {
+    header('location:index.php');
+} else {
 ?>
 
 <!DOCTYPE html>
@@ -136,9 +139,7 @@
     </div>
 
     <?php include('includes/script.php'); ?>
-    <!-- DATATABLE SCRIPTS  -->
-    <!-- <script src="assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script> -->
 </body>
 
 </html>
+<?php } ?>

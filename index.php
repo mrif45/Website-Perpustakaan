@@ -8,19 +8,19 @@ if (isset($_POST['login'])) {
     //signin process
     $email = $_POST['email_siswa'];
     $password = md5($_POST['password']);
-    $sql = "SELECT email_siswa, password FROM siswa WHERE email_siswa=:email and password=:password";
+    $sql = "SELECT email_siswa, password, id_siswa, status FROM siswa WHERE email_siswa=:email and password=:password";
     $query = $dbh->prepare($sql);
     $query->bindParam(':email', $email, PDO::PARAM_STR);
     $query->bindParam(':password', $password, PDO::PARAM_STR);
     $query->execute();
     $results = $query->fetchAll(PDO::FETCH_OBJ);
 
-    //cek pengisian
-    if ($query->rowCount() > 0) {
-        echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
-    } else {
-        echo "<script>alert('Silahkan Coba lagi');</script>";
-    }
+    // //cek pengisian
+    // if ($query->rowCount() > 0) {
+    //     echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
+    // } else {
+    //     echo "<script>alert('Silahkan Coba lagi');</script>";
+    // }
 
     //cek email
     if ($query->rowCount() > 0) {
@@ -32,11 +32,11 @@ if (isset($_POST['login'])) {
                     document.location = 'dashboard.php';
                     </script>";
             } else {
-                echo "<script>
-                    alert('Data tidak benar');
-                    </script>";
+                echo "<script>alert('Akun anda telah diblokir. silahkan hubungi admin');</script>";
             }
         }
+    } else {
+        echo "<script>alert('Data tidak benar');</script>";
     }
 }
 
@@ -78,33 +78,6 @@ if (isset($_POST['signup'])) {
             echo '<script>alert("Registrasi Sukses, berikut ID anda  "+"' . $id_siswa . '")</script>';
         } else {
             echo "<script>alert('Ada yang salah. Coba Lagi');</script>";
-        }
-    }
-}
-
-//admin login
-if ($_SESSION['alogin'] != '') {
-    $_SESSION['alogin'] = '';
-}
-if (isset($_POST['adminlogin'])) {
-    //captcha
-    if ($_POST["vercode"] != $_SESSION["vercode"] or $_SESSION["vercode"] == '') {
-        echo "<script>alert('Kode Verifikasi Salah');</script>";
-    } else {
-        //login process
-        $username = $_POST['username'];
-        $password = md5($_POST['password']);
-        $sql = "SELECT username,password FROM admin WHERE username=:username and password=:password";
-        $query = $dbh->prepare($sql);
-        $query->bindParam(':username', $username, PDO::PARAM_STR);
-        $query->bindParam(':password', $password, PDO::PARAM_STR);
-        $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_OBJ);
-        if ($query->rowCount() > 0) {
-            $_SESSION['alogin'] = $_POST['username'];
-            echo "<script type='text/javascript'> document.location ='admin/dashboard.php'; </script>";
-        } else {
-            echo "<script>alert('Silahkan Coba lagi');</script>";
         }
     }
 }
@@ -153,7 +126,7 @@ if (isset($_POST['adminlogin'])) {
                     </div>
 
                     <!-- lupa pass -->
-                    <a href="#" class="login__forgot">Lupa password?</a>
+                    <a href="lupa-pass.php" class="login__forgot">Lupa password?</a>
 
                     <!-- login button -->
                     <button href="dashboard.php" class="login__button" type="submit" name="login">Masuk</button>
@@ -167,7 +140,7 @@ if (isset($_POST['adminlogin'])) {
                     <!-- admin login option -->
                     <div>
                         <span class="login__account">Apakah anda Admin?</span>
-                        <span class="login__signin" id="admin">Login Admin</span>
+                        <a href="admin-login.php" class="login__signin" id="admin">Login Admin</a>
                     </div>
                 </form>
 
@@ -184,13 +157,14 @@ if (isset($_POST['adminlogin'])) {
                     <!-- email -->
                     <div class="login__box">
                         <i class='bx bx-at login__icon'></i>
-                        <input name="email" type="text" placeholder="Email" autocomplete="off" required class="login__input">
+                        <input name="email" id="email_siswa" onBlur="cekEmail()" type="text" placeholder="Email" autocomplete="off" required class="login__input">
+                        <span id="user-availability-status" style="font-size:12px;"></span>
                     </div>
 
                     <!-- notel -->
                     <div class="login__box">
                         <i class='bx bx-phone-call login__icon'></i>
-                        <input name="notel" type="text" placeholder="Nomor Telepon" maxlength="11" autocomplete="off" required class="login__input">
+                        <input name="notel" type="text" placeholder="Nomor Telepon" maxlength="12" autocomplete="off" required class="login__input">
                     </div>
 
                     <!-- password -->
@@ -215,44 +189,28 @@ if (isset($_POST['adminlogin'])) {
                         <span class="login__signin" id="sign-in">Masuk</span>
                     </div>
                 </form>
-
-                <!-- admin login -->
-                <form name="adminlogin" method="post" class="login__registre none" id="admin-login">
-                    <h1 class="login__title">Admin</h1>
-
-                    <!-- username -->
-                    <div class="login__box">
-                        <i class='bx bx-user login__icon'></i>
-                        <input type="text" placeholder="Masukan Username" name="username" required autocomplete="off" class="login__input">
-                    </div>
-
-                    <!-- password -->
-                    <div class="login__box">
-                        <i class='bx bx-lock-alt login__icon'></i>
-                        <input type="password" placeholder="Password" name="password" required autocomplete="off" class="login__input">
-                    </div>
-
-                    <!-- verif -->
-                    <div class="login__box">
-                        <i class='bx bx-check-shield login__icon'></i>
-                        <input type="text" name="vercode" placeholder="Kode Verifikasi" maxlength="5" autocomplete="off" required class="login__input" />
-                        <img src="captcha.php">
-                    </div>
-
-                    <!-- adminlogin button -->
-                    <button href="admin/dashboard.php" class="login__button" type="submit" name="adminlogin">Masuk</button>
-
-                    <!-- <div>
-                        <span class="login__account">Bukan admin?</span>
-                        <span class="login__signin" id="sign-in">Sign In</span>
-                    </div> -->
-                </form>
             </div>
         </div>
     </div>
 
     <!--===== MAIN JS =====-->
     <?php include('includes/script.php'); ?>
+    <!-- cek email -->
+    <script>
+        function cekEmail() {
+            $("#loaderIcon").show();
+            jQuery.ajax({
+                url: "cek-email.php",
+                data: 'email_siswa=' + $("#email_siswa").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#user-availability-status").html(data);
+                    $("#loaderIcon").hide();
+                },
+                error: function() {}
+            });
+        }
+    </script>
 </body>
 
 </html>

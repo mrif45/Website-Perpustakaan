@@ -36,10 +36,8 @@ linkColor.forEach(l=> l.addEventListener('click', colorLink))
 /*===== LOGIN SHOW and HIDDEN =====*/
 const signUp = document.getElementById('sign-up'),
     signIn = document.getElementById('sign-in'),
-    admin  = document.getElementById('admin')
     loginIn = document.getElementById('login-in'),
     loginUp = document.getElementById('login-up')
-    adminLogin = document.getElementById('admin-login')
 
 
 signUp.addEventListener('click', ()=>{
@@ -56,12 +54,4 @@ signIn.addEventListener('click', ()=>{
 
     loginIn.classList.toggle('block')
     loginUp.classList.toggle('none')    
-})
-
-admin.addEventListener('click', ()=>{
-    loginIn.classList.remove('block')
-    adminLogin.classList.remove('none')
-
-    loginIn.classList.toggle('none')
-    adminLogin.classList.toggle('block')
 })

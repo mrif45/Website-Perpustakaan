@@ -89,9 +89,9 @@ img{
   width: 100%;
   background-color: var(--first-color-lighten);
   padding: 1rem 1rem;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(35,0,77,.2);
+  box-shadow: 0 20px 20px rgba(5, 94, 79, 0.2);
   animation-duration: .4s; 
   animation-name: animate-login;
 }
@@ -123,10 +123,6 @@ img{
   border-radius: .5rem;
 }
 
-.login__box img{
-  display: inline;
-}
-
 .login__icon{
   font-size: 1.5rem;
   color: var(--first-color);
@@ -146,11 +142,6 @@ img{
   color: var(--first-color-light);
 }
 
-.login__inputs::placeholder{
-  font-size: var(--normal-font-size);
-  font-family: var(--body-font);
-  color: var(--first-color-light);
-}
 .login__forgot{
   display: block;
   width: max-content;
@@ -168,8 +159,7 @@ img{
   background-color: var(--first-color);
   color: #FFF;
   font-weight: 600;
-  /* text-align: center; */
-  border-radius: .5rem;
+  border-radius: 1rem;
   transition: .3s;
 }
 
@@ -195,6 +185,7 @@ img{
 .verif{
   margin-top: 10px;
 }
+
 .verif img {
   display: inline;
   margin-top: 10px;

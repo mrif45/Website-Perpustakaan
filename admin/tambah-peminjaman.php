@@ -143,7 +143,7 @@ if (isset($_POST['add'])) {
                             <form role="form" method="post">
 
                                 <div class="form-group">
-                                    <label>Student id<span style="color:red;">*</span></label>
+                                    <label>ID Siswa<span style="color:red;">*</span></label>
                                     <input class="form-control" type="text" name="idsiswa" id="idsiswa" onBlur="getSiswa()" autocomplete="off" required />
                                 </div>
 

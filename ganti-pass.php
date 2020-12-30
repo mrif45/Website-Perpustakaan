@@ -19,7 +19,7 @@ if (isset($_POST['change'])) {
     } else {
         $error = "Password Lama salah";
     }
-}?>
+} ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +41,7 @@ if (isset($_POST['change'])) {
 </head>
 
 <body id="body-pd">
+    <!-- header & navbar -->
     <header class="header" id="header">
         <div class="header__toggle">
             <i class="bx bx-menu" id="header-toggle"></i>
@@ -89,6 +90,7 @@ if (isset($_POST['change'])) {
     </div>
 
     <div class="container">
+        <!-- judul -->
         <div class="row pad-botm">
             <div class="col-md-12">
                 <h4 class="header-line">Ganti Password</h4>
@@ -104,6 +106,7 @@ if (isset($_POST['change'])) {
             </div>
         <?php } ?>
 
+        <!-- konten -->
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <div class="panel panel-info">
@@ -142,8 +145,10 @@ if (isset($_POST['change'])) {
     </div>
     </div>
 
+    <!--===== MAIN JS =====-->
     <?php include('includes/script.php'); ?>
-    <!-- Change Pass Script -->
+    
+    <!--===== ganti Password Script =====-->
     <script type="text/javascript">
         function valid() {
             if (document.chngpwd.newpassword.value != document.chngpwd.confirmpassword.value) {

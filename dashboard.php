@@ -23,6 +23,7 @@ if (strlen($_SESSION['login']) == 0) {
     </head>
 
     <body id="body-pd">
+        <!-- header & navbar -->
         <header class="header" id="header">
             <div class="header__toggle">
                 <i class="bx bx-menu" id="header-toggle"></i>
@@ -70,8 +71,10 @@ if (strlen($_SESSION['login']) == 0) {
             </nav>
         </div>
 
+        <!-- konten -->
         <div class="content-wrapper">
             <div class="container">
+                <!-- judul -->
                 <div class="row pad-botm">
                     <div class="col-md-12">
                         <h4 class="header-line">DASHBOARD</h4>
@@ -85,7 +88,7 @@ if (strlen($_SESSION['login']) == 0) {
                             <i class='bx bxs-book nav__icon'></i>
                             <?php
                             $sid = $_SESSION['stdid'];
-                            $sql1 = "SELECT id_siswa from peminjaman";
+                            $sql1 = "SELECT id_siswa from peminjaman where id_siswa=:sid";
                             $query1 = $dbh->prepare($sql1);
                             $query1->bindParam(':sid', $sid, PDO::PARAM_STR);
                             $query1->execute();
@@ -120,6 +123,8 @@ if (strlen($_SESSION['login']) == 0) {
                 </div>
             </div>
         </div>
+        
+        <!--===== MAIN JS =====-->
         <?php include('includes/script.php'); ?>
     </body>
 

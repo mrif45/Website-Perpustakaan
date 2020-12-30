@@ -2,18 +2,19 @@
 if (strlen($_SESSION['login']) == 0) {
     header('location:index.php');
 } else {
-if (isset($_POST['update'])) {
-    $sid = $_SESSION['stdid'];
-    $name = $_POST['nama'];
-    $notel = $_POST['notel'];
+    // ganti profil
+    if (isset($_POST['update'])) {
+        $sid = $_SESSION['stdid'];
+        $name = $_POST['nama'];
+        $notel = $_POST['notel'];
 
-    $sql = "UPDATE siswa set nama_siswa=:name,no_telp=:notel";
-    $query = $dbh->prepare($sql);
-    $query->bindParam(':name', $name, PDO::PARAM_STR);
-    $query->bindParam(':notel', $notel, PDO::PARAM_STR);
-    $query->execute();
+        $sql = "UPDATE siswa set nama_siswa=:name, id_siswa=:sid, no_telp=:notel";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->bindParam(':notel', $notel, PDO::PARAM_STR);
+        $query->execute();
 
-    echo '<script>alert("Profil anda sudah di update")</script>';
+        echo '<script>alert("Profil anda sudah di update")</script>';
     }
 }
 ?>
@@ -38,6 +39,7 @@ if (isset($_POST['update'])) {
 </head>
 
 <body id="body-pd">
+    <!-- header & navbar -->
     <header class="header" id="header">
         <div class="header__toggle">
             <i class="bx bx-menu" id="header-toggle"></i>
@@ -47,7 +49,6 @@ if (isset($_POST['update'])) {
             <img href="profil.php" src="assets/Img/profile.png" alt="">
         </div>
     </header>
-
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>
@@ -86,6 +87,7 @@ if (isset($_POST['update'])) {
         </nav>
     </div>
 
+    <!-- konten -->
     <div class="content-wrapper">
         <div class="container">
             <div class="row pad-botm">
@@ -103,7 +105,7 @@ if (isset($_POST['update'])) {
                             <form name="signup" method="post">
                                 <?php
                                 $sid = $_SESSION['stdid'];
-                                $sql = "SELECT id_siswa,nama_siswa,email_siswa,no_telp,tgl_reg,tgl_update,status from  siswa";
+                                $sql = "SELECT id_siswa,nama_siswa,email_siswa,no_telp,tgl_reg,tgl_update,status from  siswa where id_siswa=:sid";
                                 $query = $dbh->prepare($sql);
                                 $query->bindParam(':sid', $sid, PDO::PARAM_STR);
                                 $query->execute();
@@ -172,6 +174,7 @@ if (isset($_POST['update'])) {
             </div>
         </div>
     </div>
+    <!--===== MAIN JS =====-->
     <?php include('includes/script.php'); ?>
 </body>
 

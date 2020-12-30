@@ -1,6 +1,6 @@
 <?php include('includes/config.php');
 
-//sign in 
+//sign in session
 if ($_SESSION['login'] != '') {
     $_SESSION['login'] = '';
 }
@@ -15,14 +15,7 @@ if (isset($_POST['login'])) {
     $query->execute();
     $results = $query->fetchAll(PDO::FETCH_OBJ);
 
-    // //cek pengisian
-    // if ($query->rowCount() > 0) {
-    //     echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
-    // } else {
-    //     echo "<script>alert('Silahkan Coba lagi');</script>";
-    // }
-
-    //cek email
+    //cek status
     if ($query->rowCount() > 0) {
         foreach ($results as $result) {
             $_SESSION['stdid'] = $result->id_siswa;
@@ -129,7 +122,7 @@ if (isset($_POST['signup'])) {
                     <a href="lupa-pass.php" class="login__forgot">Lupa password?</a>
 
                     <!-- login button -->
-                    <button href="dashboard.php" class="login__button" type="submit" name="login">Masuk</button>
+                    <button  class="login__button" type="submit" name="login">Masuk</button>
 
                     <!-- sign up option -->
                     <div>
@@ -195,6 +188,7 @@ if (isset($_POST['signup'])) {
 
     <!--===== MAIN JS =====-->
     <?php include('includes/script.php'); ?>
+    
     <!-- cek email -->
     <script>
         function cekEmail() {

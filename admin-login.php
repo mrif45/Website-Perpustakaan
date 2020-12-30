@@ -1,4 +1,5 @@
 <?php include('includes/config.php');
+
 //admin login
 if ($_SESSION['alogin'] != '') {
     $_SESSION['alogin'] = '';

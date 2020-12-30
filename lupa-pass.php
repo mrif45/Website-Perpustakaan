@@ -1,11 +1,14 @@
 <?php include('includes/config.php');
+
+// lupa pass
 if (isset($_POST['signin'])) {
-    //code for captach verification
+    //captcha
     if ($_POST["vercode"] != $_SESSION["vercode"] or $_SESSION["vercode"] == '') {
-        echo "<script>alert('Incorrect verification code');</script>";
+        echo "<script>alert('Kode Verifikasi Salah');</script>";
     } else {
+        //cek email & no telp
         $email = $_POST['email'];
-        $mobile = $_POST['notel'];
+        $notel = $_POST['notel'];
         $newPass = md5($_POST['newPass']);
         $sql = "SELECT email_siswa FROM siswa WHERE email_siswa=:email and no_telp=:notel";
         $query = $dbh->prepare($sql);
@@ -13,8 +16,10 @@ if (isset($_POST['signin'])) {
         $query->bindParam(':notel', $notel, PDO::PARAM_STR);
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_OBJ);
+
+        // ganti password baru
         if ($query->rowCount() > 0) {
-            $con = "update siswa set password=:newpassword where email_siswa=:email and MobileNumber=:notel";
+            $con = "UPDATE siswa set password=:newPass where email_siswa=:email and no_telp=:notel";
             $chngpwd1 = $dbh->prepare($con);
             $chngpwd1->bindParam(':email', $email, PDO::PARAM_STR);
             $chngpwd1->bindParam(':notel', $notel, PDO::PARAM_STR);
@@ -51,7 +56,7 @@ if (isset($_POST['signin'])) {
 
             <!-- form lupa password -->
             <div class="login__forms">
-                <form name="chngpwd" method="post" class="login__create" id="login-in">
+                <form name="chngpwd" method="post" class="login__create" id="login-in" onsubmit="return valid()">
                     <h1 class="login__title">Lupa Password</h1>
 
                     <!-- email -->
@@ -100,6 +105,8 @@ if (isset($_POST['signin'])) {
 
     <!--===== MAIN JS =====-->
     <?php include('includes/script.php'); ?>
+    
+    <!--===== konfirmasi password =====-->
     <script type="text/javascript">
         function valid() {
             if (document.chngpwd.newPass.value != document.chngpwd.confirmpassword.value) {

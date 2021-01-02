@@ -91,12 +91,12 @@ if (isset($_POST['signin'])) {
                     </div>
 
                     <!-- signin button -->
-                    <button name="signin" type="submit" href="index.php" class="login__button">Masuk</button>
+                    <button name="signin" type="submit" href="../index.php" class="login__button">Masuk</button>
 
                     <!-- sign in option -->
                     <div>
                         <span class="login__account">Tidak lupa password?</span>
-                        <a href="index.php" class="login__signin" id="sign-in">Masuk</a>
+                        <a href="../index.php" class="login__signin" id="sign-in">Masuk</a>
                     </div>
                 </form>
             </div>

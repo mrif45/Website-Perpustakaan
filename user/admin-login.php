@@ -20,7 +20,7 @@ if (isset($_POST['adminlogin'])) {
         $results = $query->fetchAll(PDO::FETCH_OBJ);
         if ($query->rowCount() > 0) {
             $_SESSION['alogin'] = $_POST['username'];
-            echo "<script type='text/javascript'> document.location ='admin/dashboard.php'; </script>";
+            echo "<script type='text/javascript'> document.location ='../admin/dashboard.php'; </script>";
         } else {
             echo "<script>alert('Silahkan Coba lagi');</script>";
         }
@@ -78,12 +78,12 @@ if (isset($_POST['adminlogin'])) {
                     </div>
 
                     <!-- adminlogin button -->
-                    <button href="admin/dashboard.php" class="login__button" type="submit" name="adminlogin">Masuk</button>
+                    <button href="../admin/dashboard.php" class="login__button" type="submit" name="adminlogin">Masuk</button>
 
                     <!-- sign in option -->
                     <div>
                         <span class="login__account">Bukan admin?</span>
-                        <a href="index.php" class="login__signin" id="sign-in">Sign In</a>
+                        <a href="../index.php" class="login__signin" id="sign-in">Masuk sebagai siswa</a>
                     </div>
                 </form>
             </div>

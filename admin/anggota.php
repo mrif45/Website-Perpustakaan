@@ -1,6 +1,6 @@
 <?php include('includes/config.php');
 if (strlen($_SESSION['alogin']) == 0) {
-    header('location:index.php');
+    header('location: ../index.php');
 } else {
     // memblokir siswa
     if (isset($_GET['inid'])) {

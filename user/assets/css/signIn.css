@@ -1,16 +1,16 @@
 /*===== GOOGLE FONTS =====*/
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
 /*===== VARIABLES CSS =====*/
 :root{
-  /*===== Colores =====*/
+  /*===== Color =====*/
   --first-color: #004643;
   --first-color-dark: #005c57;
   --first-color-light: #99d3d0;
   --first-color-lighten: #eff3f3;
 
   /*===== Font and typography =====*/
-  --body-font: 'Open Sans', sans-serif;
+  --body-font: 'Nunito', sans-serif;
   --h1-font-size: 1.5rem;
   --normal-font-size: .900rem;
   --small-font-size: .800rem;
@@ -46,7 +46,6 @@ a{
 
 button {
   border: none;
-  margin: 32px;
   display: inline;
 }
 
@@ -73,6 +72,11 @@ img{
   justify-self: center;
 }
 
+.login__img h1{
+  position: absolute;
+  margin-top: 1rem;
+}
+
 .login__img img{
   width: 310px;
   margin-top: 1.5rem;
@@ -85,11 +89,11 @@ img{
 
 .login__registre, .login__create{
   position: absolute;
-  bottom: 0.5rem;
+  bottom: .5rem;
   width: 100%;
   background-color: var(--first-color-lighten);
   padding: 1rem 1rem;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   text-align: center;
   box-shadow: 0 20px 20px rgba(5, 94, 79, 0.2);
   animation-duration: .4s; 
@@ -153,13 +157,14 @@ img{
 }
 
 .login__button{
-  display: block;
-  padding: 1rem 8.5rem;
-  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: 316px max-content;
+  padding: 1rem 0;
+  margin: 1rem auto;
   background-color: var(--first-color);
   color: #FFF;
   font-weight: 600;
-  border-radius: 1rem;
+  border-radius: .5rem;
   transition: .3s;
 }
 
@@ -179,6 +184,7 @@ img{
 
 .login__signin, .login__signup{
   color: var(--first-color);
+  font-weight: 900;
   cursor: pointer;
 }
 
@@ -233,7 +239,6 @@ img{
 
   .login__img img{
     width: 390px;
-    margin-top: 0;
   }
 
   .login__registre, .login__create{

@@ -1,4 +1,4 @@
-<?php include('includes/config.php');
+<?php include('user/includes/config.php');
 
 //sign in session
 if ($_SESSION['login'] != '') {
@@ -22,7 +22,7 @@ if (isset($_POST['login'])) {
             if ($result->status == 1) {
                 $_SESSION['login'] = $_POST['email_siswa'];
                 echo "<script type='text/javascript'>
-                    document.location = 'dashboard.php';
+                    document.location = 'user/dashboard.php';
                     </script>";
             } else {
                 echo "<script>alert('Akun anda telah diblokir. silahkan hubungi admin');</script>";
@@ -40,7 +40,7 @@ if (isset($_POST['signup'])) {
         echo "<script>alert('Kode Salah, Coba Lagi');</script>";
     } else {
         //Generate ID Siswa
-        $hitung_siswa = ("includes/id_siswa.txt");
+        $hitung_siswa = ("user/includes/id_siswa.txt");
         $hits = file($hitung_siswa);
         $hits[0]++;
         $fp = fopen($hitung_siswa, "w");
@@ -65,12 +65,14 @@ if (isset($_POST['signup'])) {
         $query->bindParam(':status', $status, PDO::PARAM_STR);
         $query->execute();
 
+        echo '<script>alert("Registrasi Sukses")</script>';
+
         //generate ID Siswa
         $lastInsertId = $dbh->lastInsertId();
         if ($lastInsertId) {
-            echo '<script>alert("Registrasi Sukses, berikut ID anda  "+"' . $id_siswa . '")</script>';
+            echo '<script>alert("Registrasi Sukses")</script>';
         } else {
-            echo "<script>alert('Ada yang salah. Coba Lagi');</script>";
+            // echo "<script>alert('Ada yang salah. Coba Lagi');</script>";
         }
     }
 }
@@ -84,7 +86,7 @@ if (isset($_POST['signup'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ===== CSS ===== -->
-    <link rel="stylesheet" href="assets/css/signIn.css">
+    <link rel="stylesheet" href="user/assets/css/signIn.css">
 
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
@@ -97,7 +99,8 @@ if (isset($_POST['signup'])) {
         <div class="login__content">
             <!-- ilustrasi -->
             <div class="login__img">
-                <img src="assets/img/img-login.svg" alt="">
+                <!-- <h1>PERPUSTAKAAN</h1> -->
+                <img src="user/assets/img/img-login.svg" alt="">
             </div>
 
             <!-- form login -->
@@ -119,10 +122,10 @@ if (isset($_POST['signup'])) {
                     </div>
 
                     <!-- lupa pass -->
-                    <a href="lupa-pass.php" class="login__forgot">Lupa password?</a>
+                    <a href="user/lupa-pass.php" class="login__forgot">Lupa password?</a>
 
                     <!-- login button -->
-                    <button  class="login__button" type="submit" name="login">Masuk</button>
+                    <button class="login__button" type="submit" name="login">Masuk</button>
 
                     <!-- sign up option -->
                     <div>
@@ -133,7 +136,7 @@ if (isset($_POST['signup'])) {
                     <!-- admin login option -->
                     <div>
                         <span class="login__account">Apakah anda Admin?</span>
-                        <a href="admin-login.php" class="login__signin" id="admin">Login Admin</a>
+                        <a href="user/admin-login.php" class="login__signin" id="admin">Login Admin</a>
                     </div>
                 </form>
 
@@ -170,7 +173,7 @@ if (isset($_POST['signup'])) {
                     <div class="login__box">
                         <i class='bx bx-check-shield login__icon'></i>
                         <input type="text" name="vercode" placeholder="Kode Verifikasi" maxlength="5" autocomplete="off" required class="login__input" />
-                        <img src="captcha.php">
+                        <img src="user/captcha.php">
                     </div>
 
                     <!-- signup button -->
@@ -187,14 +190,20 @@ if (isset($_POST['signup'])) {
     </div>
 
     <!--===== MAIN JS =====-->
-    <?php include('includes/script.php'); ?>
-    
+    <script src="user/assets/js/main.js"></script>
+    <!-- FOOTER SECTION END-->
+    <script src="user/assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="user/assets/js/bootstrap.js"></script>
+    <!-- CUSTOM SCRIPTS  -->
+    <script src="user/assets/js/custom.js"></script>
+
     <!-- cek email -->
     <script>
         function cekEmail() {
             $("#loaderIcon").show();
             jQuery.ajax({
-                url: "cek-email.php",
+                url: "user/cek-email.php",
                 data: 'email_siswa=' + $("#email_siswa").val(),
                 type: "POST",
                 success: function(data) {

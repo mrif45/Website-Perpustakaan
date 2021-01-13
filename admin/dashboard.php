@@ -90,6 +90,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                 <!-- Jumlah Buku -->
                 <div class="row">
+                    <!-- Jumlah Buku dipinjam -->
                     <div class="col-md-3 col-sm-3 col-xs-6">
                         <div class="alert alert-success back-widget-set text-center">
                             <i class='bx bxs-book nav__icon'></i>
@@ -141,10 +142,8 @@ if (strlen($_SESSION['alogin']) == 0) {
                             <h4>Jumlah buku dikembalikan</h4>
                         </div>
                     </div>
-                </div>
 
-                <!-- Jumlah Anggota -->
-                <div class="row">
+                    <!-- Jumlah Anggota -->
                     <div class="col-md-3 col-sm-3 col-xs-6">
                         <div class="alert alert-danger back-widget-set text-center">
                             <i class='bx bxs-user-circle nav__icon'></i>
@@ -161,7 +160,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                     </div>
 
                     <!-- Jumlah kategori -->
-                    <div class="col-md-3 col-sm-3 rscol-xs-6">
+                    <div class="col-md-3 col-sm-3 col-xs-6">
                         <div class="alert alert-info back-widget-set text-center">
                             <i class='bx bxs-folder-open nav__icon'></i>
                             <?php

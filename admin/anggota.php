@@ -6,7 +6,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     if (isset($_GET['inid'])) {
         $id_siswa = $_GET['inid'];
         $status = 0;
-        $sql = "update siswa set status=:status  WHERE id_siswa=:id_siswa";
+        $sql = "update siswa set status=:status where id_siswa=:id_siswa";
         $query = $dbh->prepare($sql);
         $query->bindParam(':id_siswa', $id_siswa, PDO::PARAM_STR);
         $query->bindParam(':status', $status, PDO::PARAM_STR);
@@ -18,7 +18,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     if (isset($_GET['id'])) {
         $id_siswa = $_GET['id'];
         $status = 1;
-        $sql = "update siswa set status=:status  WHERE id_siswa=:id_siswa";
+        $sql = "update siswa set status=:status where id_siswa=:id_siswa";
         $query = $dbh->prepare($sql);
         $query->bindParam(':id_siswa', $id_siswa, PDO::PARAM_STR);
         $query->bindParam(':status', $status, PDO::PARAM_STR);

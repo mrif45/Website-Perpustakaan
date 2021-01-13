@@ -5,7 +5,7 @@ require_once("includes/config.php");
 if(!empty($_POST["email_siswa"])) {
 	$email= $_POST["email_siswa"];
 	if (filter_var($email, FILTER_VALIDATE_EMAIL)===false) {
-		echo "error : You did not enter a valid email.";
+		echo "Error : Email anda tidak benar.";
 	} else {
 		$sql ="SELECT email_siswa FROM siswa WHERE email_siswa=:email";
 		$query= $dbh -> prepare($sql);

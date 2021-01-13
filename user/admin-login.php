@@ -49,7 +49,7 @@ if (isset($_POST['adminlogin'])) {
         <div class="login__content">
             <!-- ilustrasi -->
             <div class="login__img">
-                <img src="assets/img/img-login.svg" alt="">
+                <img src="assets/Img/img-login.svg" alt="">
             </div>
 
             <!-- form login -->
@@ -61,13 +61,13 @@ if (isset($_POST['adminlogin'])) {
                     <!-- username -->
                     <div class="login__box">
                         <i class='bx bx-user login__icon'></i>
-                        <input type="text" placeholder="Masukan Username" name="username" required autocomplete="off" class="login__input">
+                        <input name="username" type="text" placeholder="Masukan Username" required autocomplete="off" class="login__input">
                     </div>
 
                     <!-- password -->
                     <div class="login__box">
                         <i class='bx bx-lock-alt login__icon'></i>
-                        <input type="password" placeholder="Password" name="password" required autocomplete="off" class="login__input">
+                        <input name="password" type="password" placeholder="Password" required autocomplete="off" class="login__input">
                     </div>
 
                     <!-- verif -->
@@ -81,10 +81,8 @@ if (isset($_POST['adminlogin'])) {
                     <button href="../admin/dashboard.php" class="login__button" type="submit" name="adminlogin">Masuk</button>
 
                     <!-- sign in option -->
-                    <div>
-                        <span class="login__account">Bukan admin?</span>
-                        <a href="../index.php" class="login__signin" id="sign-in">Masuk sebagai siswa</a>
-                    </div>
+                    <span class="login__account">Bukan admin?</span>
+                    <a href="../index.php" class="login__signin" id="sign-in">Masuk sebagai siswa</a>
                 </form>
             </div>
         </div>

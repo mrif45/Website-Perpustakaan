@@ -97,7 +97,7 @@ if (strlen($_SESSION['login']) == 0) {
                             ?>
 
                             <h4><?php echo htmlentities($peminjaman); ?> </h4>
-                            <h4>Buku yang dipinjam</h4>
+                            <h5>Buku yang dipinjam</h5>
                         </div>
                     </div>
 
@@ -106,18 +106,18 @@ if (strlen($_SESSION['login']) == 0) {
                         <div class="alert alert-warning back-widget-set text-center">
                             <i class='bx bx-recycle nav__icon'></i>
                             <?php
-                            $rsts = 0;
-                            $sql2 = "SELECT id_pinjam from peminjaman and status=:rsts";
+                            $rsts = 1;
+                            $sql2 = "SELECT id_pinjam from peminjaman where id_siswa=:sid and status=:rsts";
                             $query2 = $dbh->prepare($sql2);
-                            // $query2->bindParam(':sid', $sid, PDO::PARAM_STR);
+                            $query2->bindParam(':sid', $sid, PDO::PARAM_STR);
                             $query2->bindParam(':rsts', $rsts, PDO::PARAM_STR);
                             $query2->execute();
                             $results2 = $query2->fetchAll(PDO::FETCH_OBJ);
-                            $returnedbooks = $query2->rowCount();
+                            $bukuKembali = $query2->rowCount();
                             ?>
 
-                            <h4><?php echo htmlentities($returnedbooks); ?></h4>
-                            <h4>Buku yang belum dikembalikan</h4>
+                            <h4><?php echo htmlentities($bukuKembali); ?></h4>
+                            <h5>Buku yang belum dikembalikan</h5>
                         </div>
                     </div>
                 </div>

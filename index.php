@@ -66,14 +66,6 @@ if (isset($_POST['signup'])) {
         $query->execute();
 
         echo '<script>alert("Registrasi Sukses")</script>';
-
-        //generate ID Siswa
-        $lastInsertId = $dbh->lastInsertId();
-        if ($lastInsertId) {
-            echo '<script>alert("Registrasi Sukses")</script>';
-        } else {
-            // echo "<script>alert('Ada yang salah. Coba Lagi');</script>";
-        }
     }
 }
 ?>
@@ -99,8 +91,7 @@ if (isset($_POST['signup'])) {
         <div class="login__content">
             <!-- ilustrasi -->
             <div class="login__img">
-                <!-- <h1>PERPUSTAKAAN</h1> -->
-                <img src="user/assets/img/img-login.svg" alt="">
+                <img src="user/assets/Img/img-login.svg" alt="">
             </div>
 
             <!-- form login -->
@@ -112,26 +103,24 @@ if (isset($_POST['signup'])) {
                     <!-- email -->
                     <div class="login__box">
                         <i class='bx bx-user login__icon'></i>
-                        <input type="text" placeholder="Masukan Email Anda" name="email_siswa" required autocomplete="off" class="login__input">
+                        <input name="email_siswa" type="text" placeholder="Masukan Email Anda" required autocomplete="off" class="login__input">
                     </div>
 
                     <!-- password -->
                     <div class="login__box">
                         <i class='bx bx-lock-alt login__icon'></i>
-                        <input type="password" placeholder="Password" name="password" required autocomplete="off" class="login__input">
+                        <input name="password" type="password" placeholder="Password" required autocomplete="off" class="login__input">
                     </div>
 
                     <!-- lupa pass -->
                     <a href="user/lupa-pass.php" class="login__forgot">Lupa password?</a>
 
                     <!-- login button -->
-                    <button class="login__button" type="submit" name="login">Masuk</button>
+                    <button name="login" type="submit" class="login__button">Masuk</button>
 
                     <!-- sign up option -->
-                    <div>
-                        <span class="login__account">Belum punya akun?</span>
-                        <span class="login__signup" id="sign-up">Daftar</span>
-                    </div>
+                    <span class="login__account">Belum punya akun?</span>
+                    <span class="login__signup" id="sign-up">Daftar</span>
 
                     <!-- admin login option -->
                     <div>
@@ -153,7 +142,7 @@ if (isset($_POST['signup'])) {
                     <!-- email -->
                     <div class="login__box">
                         <i class='bx bx-at login__icon'></i>
-                        <input name="email" id="email_siswa" onBlur="cekEmail()" type="text" placeholder="Email" autocomplete="off" required class="login__input">
+                        <input name="email" type="text" placeholder="Email" id="email_siswa" onBlur="cekEmail()" autocomplete="off" required class="login__input">
                         <span id="user-availability-status" style="font-size:12px;"></span>
                     </div>
 
@@ -172,7 +161,7 @@ if (isset($_POST['signup'])) {
                     <!-- verif -->
                     <div class="login__box">
                         <i class='bx bx-check-shield login__icon'></i>
-                        <input type="text" name="vercode" placeholder="Kode Verifikasi" maxlength="5" autocomplete="off" required class="login__input" />
+                        <input name="vercode" type="text" placeholder="Kode Verifikasi" maxlength="5" autocomplete="off" required class="login__input" />
                         <img src="user/captcha.php">
                     </div>
 
@@ -180,10 +169,8 @@ if (isset($_POST['signup'])) {
                     <button name="signup" type="submit" href="index.php" class="login__button">Daftar</button>
 
                     <!-- sign in option -->
-                    <div>
-                        <span class="login__account">Sudah punya akun ?</span>
-                        <span class="login__signin" id="sign-in">Masuk</span>
-                    </div>
+                    <span class="login__account">Sudah punya akun ?</span>
+                    <span class="login__signin" id="sign-in">Masuk</span>
                 </form>
             </div>
         </div>
